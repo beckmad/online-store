@@ -3,10 +3,17 @@ import {connect} from 'react-redux';
 import './shop-header.css';
 import {Link} from "react-router-dom";
 import logo from './logo.png';
+import {changeTheme} from "../../actions";
+import PropTypes from 'prop-types'
 
-const ShopHeader = ({totalPrice}) => {
+const ShopHeader = ({totalPrice, lengthItems, changeTheme, theme}) => {
+    const switcher = {
+        light: '🌖',
+        dark: '🌒'
+    }
     return (
         <header className="shop-header row">
+            <button className='btn' onClick={() => changeTheme(theme)}>{switcher[theme]}</button>
             <Link to='/'>
                 <div className="logo text-dark">
                     <img src={logo} alt="logo" width='50' className='img'/>
@@ -15,6 +22,7 @@ const ShopHeader = ({totalPrice}) => {
             </Link>
             <Link to='/cart'>
                 <div className="shopping-cart">
+                    {lengthItems}
                     <i className="cart-icon fa fa-shopping-cart"/>
                     {totalPrice}₽
                 </div>
@@ -22,9 +30,19 @@ const ShopHeader = ({totalPrice}) => {
         </header>
     );
 };
-
-const mapStateToProps = (state) => ({
-    totalPrice: state.totalPrice
+ShopHeader.proPypes = {
+    lengthItems: PropTypes.number,
+    totalPrice: PropTypes.number
+}
+const mapStateToProps = ({totalPrice, lengthItems, theme}) => ({
+    totalPrice,
+    lengthItems,
+    theme
 });
 
-export default connect(mapStateToProps)(ShopHeader);
+const mapDispatchToProps = (dispatch) => ({
+    changeTheme: (theme) => dispatch(changeTheme(theme)),
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(ShopHeader);

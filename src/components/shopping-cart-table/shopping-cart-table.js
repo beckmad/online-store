@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {addToCart, decItem, deleteItem, incItem} from "../../actions";
+import {addToCart, decItem, deleteItem} from "../../actions";
 import './shopping-cart-table.css';
 
 const ShoppingCartTable = ({cartItems, onDelete, onIncrease, onDecrease, totalPrice}) => {

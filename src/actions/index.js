@@ -17,11 +17,6 @@ export const addToCart = (id) => ({
     id
 });
 
-export const incItem = (id) => ({
-    type: 'INC_ITEM',
-    id
-})
-
 export const decItem = (id) => ({
     type: 'DEC_ITEM',
     id
@@ -30,6 +25,11 @@ export const decItem = (id) => ({
 export const deleteItem = (id) => ({
     type: 'DELETE_ITEM',
     id
+})
+
+export const changeTheme = (theme) => ({
+    type: 'CHANGE_THEME',
+    theme
 })
 
 export const fetchData = (dispatch, bookstoreService) => () => {

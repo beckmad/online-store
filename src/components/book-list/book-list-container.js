@@ -39,10 +39,7 @@ const mapStateToProps = ({books, loading, error}) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatch,
-        onAddToCart: (id) => {
-            console.log('onAddToCart')
-            dispatch(addToCart(id));
-        }
+        onAddToCart: (id) => dispatch(addToCart(id))
     }
 };
 

@@ -1,10 +1,11 @@
 const initialState = {
+    theme: 'light',
     books: [],
     loading: true,
     error: false,
     cartItems: [],
     totalPrice: 0,
-    lengthItems: 0
+    lengthItems: '0'
 };
 const updateCartItems = (allBooks, book, newBook) => {
     let copyItems = [...allBooks];
@@ -36,6 +37,11 @@ const decCartItems = (allBooks, book, newBook) => {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case 'CHANGE_THEME':
+            return {
+                ...state,
+                theme: action.theme === 'light' ? 'dark' : 'light'
+            }
         case 'FETCH_BOOKS_SUCCESS':
             return {
                 ...state,
@@ -67,29 +73,31 @@ const reducer = (state = initialState, action) => {
                 price: book.price,
             }
 
-            const items = updateCartItems(state.cartItems, book, newBook);
-            const totalPrice = items.reduce((prev, cur) => prev + cur.price, 0)
+            const cartItems = updateCartItems(state.cartItems, book, newBook);
+            const totalPrice = cartItems.reduce((prev, cur) => prev + cur.price, 0);
+            const lengthItems = cartItems.reduce((prev, cur) => prev + cur.count, 0);
 
             return {
                 ...state,
-                cartItems: items,
-                totalPrice: totalPrice,
-                lengthItems: items.length
+                cartItems,
+                totalPrice,
+                lengthItems,
             }
         }
         case 'DELETE_ITEM':
             const deleteId = action.id;
             const idx = state.cartItems.findIndex(item => deleteId === item.id);
-            const currentItems = [
+            const cartItems = [
                 ...state.cartItems.slice(0, idx),
                 ...state.cartItems.slice(idx + 1)
             ];
-            const totalPrice = currentItems.reduce((prev, cur) => prev + cur.price, 0)
+            const totalPrice = cartItems.reduce((prev, cur) => prev + cur.price, 0);
+            const lengthItems = cartItems.reduce((prev, cur) => prev + cur.count, 0);
             return {
                 ...state,
-                cartItems: currentItems,
-                totalPrice: totalPrice,
-                lengthItems: currentItems.length
+                cartItems,
+                totalPrice,
+                lengthItems
             }
         case 'DEC_ITEM': {
             const bookId = action.id;
@@ -98,14 +106,15 @@ const reducer = (state = initialState, action) => {
                 id: book.id
             }
 
-            const items = decCartItems(state.cartItems, book, newBook);
-            let totalPrice = items.reduce((prev, cur) => prev + cur.price, 0)
+            const cartItems = decCartItems(state.cartItems, book, newBook);
+            let totalPrice = cartItems.reduce((prev, cur) => prev + cur.price, 0);
+            let lengthItems = cartItems.reduce((prev, cur) => prev + cur.count, 0);
 
             return {
                 ...state,
-                cartItems: items,
-                totalPrice: totalPrice,
-                currentItems: items.length
+                cartItems,
+                totalPrice,
+                lengthItems
             }
         }
         default:
