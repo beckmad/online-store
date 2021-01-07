@@ -8,12 +8,12 @@ import PropTypes from 'prop-types'
 
 const ShopHeader = ({totalPrice, lengthItems, changeTheme, theme}) => {
     const switcher = {
-        light: '🌖',
-        dark: '🌒'
+        light: '🌒',
+        dark: '🌖'
     }
     return (
         <header className="shop-header row">
-            <button className='btn' onClick={() => changeTheme(theme)}>{switcher[theme]}</button>
+            <button className='btn' onClick={changeTheme}>{switcher[theme]}</button>
             <Link to='/'>
                 <div className="logo text-dark">
                     <img src={logo} alt="logo" width='50' className='img'/>
@@ -40,9 +40,9 @@ const mapStateToProps = ({totalPrice, lengthItems, theme}) => ({
     theme
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    changeTheme: (theme) => dispatch(changeTheme(theme)),
+const mergeProps = (stateToProps, {dispatch}) => ({
+    ...stateToProps,
+    changeTheme: () => dispatch(changeTheme(stateToProps.theme))
+});
 
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ShopHeader);
+export default connect(mapStateToProps, null, mergeProps)(ShopHeader);
