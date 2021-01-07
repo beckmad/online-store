@@ -7,6 +7,7 @@ const initialState = {
     totalPrice: 0,
     lengthItems: '0'
 };
+
 const updateCartItems = (allBooks, book, newBook) => {
     let copyItems = [...allBooks];
     let isContain;
@@ -22,6 +23,7 @@ const updateCartItems = (allBooks, book, newBook) => {
 
     return copyItems;
 }
+
 const decCartItems = (allBooks, book, newBook) => {
     let copyItems = [...allBooks];
     copyItems = copyItems.map((item) => {
