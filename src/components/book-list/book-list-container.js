@@ -32,25 +32,17 @@ class BookListContainer extends Component {
     }
 }
 
-const mapStateToProps = ({books, loading, error}) => {
-    return {books, loading, error};
-};
+const mapStateToProps = ({books, loading, error}) => ({
+    books,
+    loading,
+    error
+});
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatch,
-        onAddToCart: (id) => dispatch(addToCart(id))
-    }
-};
-
-const mergeProps = (stateProps, dispatchProps, {bookstoreService}) => {
-    return {
-        ...stateProps,
-        ...dispatchProps,
-        fetchData: fetchData(dispatchProps.dispatch, bookstoreService)
-    }
-}
+const mapDispatchToProps = (dispatch, {bookstoreService}) => ({
+    fetchData: fetchData(dispatch, bookstoreService),
+    onAddToCart: (id) => dispatch(addToCart(id))
+});
 
 export default compose(withBookstoreService(),
-    connect(mapStateToProps, mapDispatchToProps, mergeProps)
+    connect(mapStateToProps, mapDispatchToProps)
 )(BookListContainer);

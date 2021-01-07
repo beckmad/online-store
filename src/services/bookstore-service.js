@@ -1,5 +1,7 @@
+import {sleep} from "./utils";
+
 export default class BookstoreService {
-    data = [
+    #data = [
         {
             id: 1,
             title: 'Роковые яйца',
@@ -23,12 +25,9 @@ export default class BookstoreService {
         }
     ]
 
-    getBooks() {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(this.data);
-            }, 400)
-        });
-    }
+    async getBooks() {
+        await sleep(400);
 
+        return this.#data;
+    }
 }
