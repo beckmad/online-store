@@ -1,8 +1,12 @@
-import {sleep} from "./utils";
-
-export default class BookstoreService {
-    #data = [
+module.exports = {
+    path: '/books',
+    method: 'GET',
+    delay: 400,
+    cache: false,
+    template: [
         {
+            test: (params, query, body, cookies, headers) => ({params, query, body, cookies, headers}),
+            qwe: 1,
             id: 1,
             title: 'Роковые яйца',
             author: 'Булгаков М. A.',
@@ -24,10 +28,4 @@ export default class BookstoreService {
             coverImage: 'https://github.com/azat-io/you-dont-know-js-ru/raw/master/scope%20%26%20closures/cover.jpg'
         }
     ]
-
-    async getBooks() {
-        await sleep(400);
-
-        return this.#data;
-    }
 }

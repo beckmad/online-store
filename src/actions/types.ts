@@ -25,7 +25,6 @@ interface IFetchBooksFailure {
 interface IAddToCart {
     type: typeof ADD_TO_CART;
     id: number;
-
 }
 
 interface IDecFromCart {
