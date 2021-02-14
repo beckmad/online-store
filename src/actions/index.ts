@@ -6,7 +6,8 @@ import {
     ADD_TO_CART,
     DEC_ITEM,
     DELETE_ITEM,
-    CHANGE_THEME, TCartActionTypes
+    CHANGE_THEME,
+    TCartActionTypes,
 } from './types';
 
 const booksRequested = (): TCartActionTypes => ({
@@ -20,33 +21,33 @@ const booksLoaded = (newBooks: IBook[]): TCartActionTypes => ({
 
 const getError = (error: Error): TCartActionTypes => ({
     type: FETCH_BOOKS_FAILURE,
-    error
+    error,
 });
 
 export const addToCart = (id: number): TCartActionTypes => ({
     type: ADD_TO_CART,
-    id
+    id,
 });
 
 export const decItem = (id: number): TCartActionTypes => ({
     type: DEC_ITEM,
-    id
-})
+    id,
+});
 
 export const deleteItem = (id: number): TCartActionTypes => ({
     type: DELETE_ITEM,
-    id
-})
+    id,
+});
 
 export const changeTheme = (theme: TTheme): TCartActionTypes => ({
     type: CHANGE_THEME,
-    theme
-})
+    theme,
+});
 
 export const fetchData = (dispatch, bookstoreService): Function => (): void => {
     dispatch(booksRequested());
     bookstoreService
         .getBooks()
-        .then(data => dispatch(booksLoaded(data)))
-        .catch(e => dispatch(getError(e)))
-}
+        .then((data) => dispatch(booksLoaded(data)))
+        .catch((e) => dispatch(getError(e)));
+};

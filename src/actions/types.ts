@@ -1,4 +1,4 @@
-import {IBook, TTheme} from "../models";
+import {IBook, TTheme} from '../models';
 
 export const FETCH_BOOKS_REQUEST = 'FETCH_BOOKS_REQUEST';
 export const FETCH_BOOKS_SUCCESS = 'FETCH_BOOKS_SUCCESS';
@@ -42,10 +42,11 @@ interface IChangeTheme {
     theme: TTheme;
 }
 
-export type TCartActionTypes = IFetchBooksRequest |
-    IFetchBooksSuccess |
-    IFetchBooksFailure |
-    IAddToCart |
-    IDecFromCart |
-    IDeleteItem |
-    IChangeTheme;
+export type TCartActionTypes =
+    | IFetchBooksRequest
+    | IFetchBooksSuccess
+    | IFetchBooksFailure
+    | IAddToCart
+    | IDecFromCart
+    | IDeleteItem
+    | IChangeTheme;
